@@ -1,6 +1,6 @@
 {
   "name": "react-autofocus",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simple container & HOC pair to control and auto-focus elements (for example <input> for Web or <TextInput> for React Native or <CustomElement> for both :D)",
   "main": "./lib/index.js",
   "scripts": {
