@@ -1,0 +1,45 @@
+{
+  "name": "react-autofocus",
+  "version": "0.1.0",
+  "description": "Simple container & HOC pair to control and auto-focus elements (for example <input> for Web or <TextInput> for React Native or <CustomElement> for both :D)",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corupta/react-auto-focus.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "react-native",
+    "input",
+    "autofocus",
+    "auto",
+    "focus",
+    "textinput",
+    "custom",
+    "HOC"
+  ],
+  "author": "corupta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/corupta/react-auto-focus/issues"
+  },
+  "homepage": "https://github.com/corupta/react-auto-focus#readme",
+  "dependencies": {
+    "avl": "^1.4.4",
+    "react": "^16.6.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "prop-types": "^15.6.2"
+  }
+}

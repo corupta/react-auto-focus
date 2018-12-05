@@ -1,0 +1,11 @@
+# transpiled files
+lib
+
+node_modules
+
+# lock files
+package-lock.json
+yarn.lock
+
+# editor specific
+.idea

@@ -1,0 +1,12 @@
+# source files
+src
+node_modules
+.babelrc
+.gitignore
+
+# lock files
+package-lock.json
+yarn.lock
+
+# editor specific
+.idea
