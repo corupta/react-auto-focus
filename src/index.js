@@ -8,8 +8,8 @@ const orderShift = 10;
 
 class AutoFocusContainer extends React.PureComponent {
   static propTypes = {
-    skipToPrev: PropTypes.func,
-    skipToNext: PropTypes.func,
+    prev: PropTypes.func,
+    next: PropTypes.func,
     children: PropTypes.any,
     orderComparator: PropTypes.func,
     focusDefaultDirection: PropTypes.string.oneOf(['FORWARD', 'BACKWARD'])
@@ -75,12 +75,12 @@ class AutoFocusContainer extends React.PureComponent {
         }
       }
     } else if (forward) {
-      focus = this.props.skipToNext;
+      focus = this.props.next;
     } else {
-      focus = this.props.skipToPrev;
+      focus = this.props.prev;
     }
     if (focus) {
-      focus();
+      focus(direction);
     }
   }
 
@@ -106,7 +106,7 @@ class AutoFocusContainer extends React.PureComponent {
       if (!focus) {
         return this.next(nextUID);
       }
-      focus();
+      focus('FORWARD');
       return () => this.next(nextUID);
     }
     if (this.props.next) {
@@ -123,7 +123,7 @@ class AutoFocusContainer extends React.PureComponent {
       if (!focus) {
         return this.prev(prevUID);
       }
-      focus();
+      focus('BACKWARD');
       return () => this.prev(prevUID);
     }
     if (this.props.prev) {
@@ -186,7 +186,7 @@ class AutoFocusContainer extends React.PureComponent {
   }
 }
 
-const AutoFocusContainerWithFocus = withAutoFocus('focus', ['skipToNext'], ['skipToPrev'])(AutoFocusContainer);
+const AutoFocusContainerWithFocus = withAutoFocus('focus', ['next'], ['prev'])(AutoFocusContainer);
 
 export { AutoFocusContainerWithFocus as AutoFocusContainer };
 
@@ -257,6 +257,9 @@ export const withAutoFocus = (focusExtractor, nextPropNames = [], prevPropNames 
 
   const memoizedProps = {};
   const propsBuilderWithMemoize = (props, next, prev, uid) => {
+    if (!next && !prev) {
+      return {};
+    }
     const { prevProps, prevNext, prevPrev } = memoizedProps[uid];
     if (!shallowEquals(prevProps, props) || prevNext !== next || prevPrev !== prev) {
       memoizedProps[uid] = {
@@ -285,7 +288,7 @@ export const withAutoFocus = (focusExtractor, nextPropNames = [], prevPropNames 
                     (uid) => (
                       <SomeComponent
                         { ...props }
-                        ref={ subscribe(ref, focusExtractor, autoFocusOrder, uid) }
+                        ref={ subscribe && subscribe(ref, focusExtractor, autoFocusOrder, uid) }
                         { ...propsBuilderWithMemoize(props, next, prev, uid) }
                       />
                     )
